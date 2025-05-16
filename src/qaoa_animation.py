@@ -1,7 +1,7 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation, FFMpegWriter
 from scipy.linalg import expm
 from scipy.optimize import minimize
 
@@ -86,15 +86,15 @@ H_diag = H_C.diagonal()
 psi0 = np.ones(n, dtype=complex) / np.sqrt(n)
 gamma, beta = np.split(res.x, 2)
 frames = 25 * 4
-writer = PillowWriter(fps=15, metadata={'loop': 1})
+writer = writer = FFMpegWriter(fps=25)
 
 for i, (g, b) in enumerate(zip(gamma, beta)):
     _, sv1 = phase_shift(8, psi0, H_diag, 0, g, g / frames)
     anim = animate_qaoa(sv1)
-    anim.save(f'qaoa_phase_{i}.gif', writer=writer)
+    anim.save(f'qaoa_phase_{i}.mp4', writer=writer)
     _, sv2 = compute_mixing(8, sv1[-1], 0.0, b, b / frames)
     anim = animate_qaoa(sv2, edges=True)
-    anim.save(f'qaoa_mix_{i}.gif', writer=writer)
+    anim.save(f'qaoa_mix_{i}.mp4', writer=writer)
     psi0 = sv2[-1]
     if i == 0:
         statevectors = np.concat([sv1, sv2], axis=0)
