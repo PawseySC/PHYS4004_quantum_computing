@@ -21,4 +21,4 @@
    python -m jupyterlab
    ```
 
-   In the JupyterLab file browser, double-click **`PHYS4004_quantum_computing.ipynb`** to begin.
+   In the JupyterLab file browser, double-click **`Part_1_Programming_with_Qiskit.ipynb`** to begin. Continue with **`Part_2_Solving_Max_Cut_with_QAOA.ipynb`** after completing Part 1.
